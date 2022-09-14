@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Button from "./components/Button";
 
 // fetch axios
 const App = () => {
@@ -33,10 +34,7 @@ const App = () => {
             {user.name} age is {user.age} years old
           </div>
         ))}
-
-      <button onClick={fetchUserData} className="btn btn-primary">
-        Fetch user data
-      </button>
+      <Button handleClick={fetchUserData} title="Fetch user data" />
     </div>
   );
 };
