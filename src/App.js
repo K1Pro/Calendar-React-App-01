@@ -1,19 +1,26 @@
 import { useState } from "react";
+import axios from "axios";
 
 // fetch axios
 const App = () => {
   const [users, setUsers] = useState([]);
 
   const fetchUserData = () => {
-    // alert("fetch user from API");
-    fetch(`http://192.168.64.9:8000/api/users`, {
-      method: "Get",
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => setUsers(data.users))
+    axios
+      .get(`http://192.168.64.9:8000/api/users`)
+      // .then((data) => setUsers(data.data.users)) before destructuring
+      .then(({ data }) => setUsers(data.users))
       .catch((err) => console.log(err));
+
+    // using fetch instead of axios
+    // fetch(`http://192.168.64.9:8000/api/users`, {
+    //   method: "Get",
+    // })
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((data) => setUsers(data.users))
+    //   .catch((err) => console.log(err));
   };
 
   return (
