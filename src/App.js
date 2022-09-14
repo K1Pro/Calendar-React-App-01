@@ -2,14 +2,31 @@ import { useState } from "react";
 
 // fetch axios
 const App = () => {
-  const [user, serUser] = useState("");
+  const [users, setUsers] = useState([]);
 
   const fetchUserData = () => {
-    alert("fetch user from API");
+    // alert("fetch user from API");
+    fetch(`http://192.168.64.9:8000/api/users`, {
+      method: "Get",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => setUsers(data.users))
+      .catch((err) => console.log(err));
   };
 
   return (
     <div className="container">
+      {/* <pre>{JSON.stringify(users, null, 4)}</pre> */}
+
+      {users &&
+        users.map((user) => (
+          <div className="alert alert-primary" key={user.age}>
+            {user.name} age is {user.age} years old
+          </div>
+        ))}
+
       <button onClick={fetchUserData} className="btn btn-primary">
         Fetch user data
       </button>
